@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <style>
+    :root {
+      --netflix-black: #141414;
+      --netflix-red: #e50914;
+      --dark-gray: #222;
+      --light-text: #fff;
+      --medium-gray: #888;
+      --button-hover: #ff0a16;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--netflix-black);
+      color: var(--light-text);
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--netflix-red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--medium-gray);
+    }
+
+    .nav-links a.active {
+      color: var(--netflix-red);
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .auth-buttons button {
+      background-color: var(--netflix-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .auth-buttons button:hover {
+      background-color: var(--button-hover);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+    }
+
+    .movie-detail-header {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .movie-poster {
+      flex: 0 0 300px;
+      height: 450px;
+      background-color: var(--dark-gray);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .movie-info {
+      flex: 1;
+    }
+
+    .movie-info h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .movie-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--medium-gray);
+    }
+
+    .movie-description {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-buttons button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .play-btn {
+      background-color: var(--netflix-red);
+      color: white;
+    }
+
+    .watchlist-btn {
+      background-color: rgba(109, 109, 110, 0.7);
+      color: var(--light-text);
+    }
+
+    .action-buttons button:hover {
+      opacity: 0.9;
+    }
+
+    .cast-section {
+      margin-top: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cast-list {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scrollbar-width: none;
+    }
+
+    .cast-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cast-card {
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .cast-image {
+      width: 100px;
+      height: 100px;
+      background-color: var(--dark-gray);
+      border-radius: 50%;
+      margin: 0 auto 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 2rem;
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .movie-detail-header {
+        flex-direction: column;
+      }
+
+      .movie-poster {
+        flex: 0 0 200px;
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">StreamShop</div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/netflix-dashboard">Netflix Dashboard</a>
+      <a href="/amazon-search">Amazon Search</a>
+      <a href="/movie-details" class="active">Movie Details</a>
+      <a href="/product-details">Product Details</a>
+      <a href="/login">Login</a>
+    </div>
+    <div class="auth-buttons">
+      <button onclick="location.href='/login'">Sign In</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="movie-detail-header">
+      <div class="movie-poster">Movie Poster</div>
+      <div class="movie-info">
+        <h1>Movie Title</h1>
+        <div class="movie-meta">
+          <span>2023</span>
+          <span>1h 55m</span>
+          <span>PG-13</span>
+        </div>
+        <p class="movie-description">
+          This is a detailed description of the movie. It includes the plot summary, key themes, and what makes this film special. 
+          Viewers will get a comprehensive overview of the story, characters, and cinematic experience they can expect.
+        </p>
+        <div class="action-buttons">
+          <button class="play-btn">Play</button>
+          <button class="watchlist-btn">Add to Watchlist</button>
+        </div>
+        <div>
+          <h3>Director:</h3>
+          <p>Director Name</p>
+        </div>
+        <div>
+          <h3>Cast:</h3>
+          <p>Actor One, Actor Two, Actor Three</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cast Section -->
+    <section class="cast-section">
+      <h2 class="section-title">Cast</h2>
+      <div class="cast-list">
+        <div class="cast-card">
+          <div class="cast-image">Actor 1</div>
+          <p>Actor Name</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Actor 2</div>
+          <p>Actor Name</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Actor 3</div>
+          <p>Actor Name</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Actor 4</div>
+          <p>Actor Name</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Actor 5</div>
+          <p>Actor Name</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Actor 6</div>
+          <p>Actor Name</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="cast-section">
+      <h2 class="section-title">You May Also Like</h2>
+      <div class="cast-list">
+        <div class="cast-card">
+          <div class="cast-image">Movie 1</div>
+          <p>Related Movie</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Movie 2</div>
+          <p>Related Movie</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Movie 3</div>
+          <p>Related Movie</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Movie 4</div>
+          <p>Related Movie</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-image">Movie 5</div>
+          <p>Related Movie</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 StreamShop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
