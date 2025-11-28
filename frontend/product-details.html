@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <style>
+    :root {
+      --netflix-black: #141414;
+      --netflix-red: #e50914;
+      --dark-gray: #222;
+      --light-text: #fff;
+      --medium-gray: #888;
+      --button-hover: #ff0a16;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--netflix-black);
+      color: var(--light-text);
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--netflix-red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--medium-gray);
+    }
+
+    .nav-links a.active {
+      color: var(--netflix-red);
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .auth-buttons button {
+      background-color: var(--netflix-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .auth-buttons button:hover {
+      background-color: var(--button-hover);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+    }
+
+    .product-detail-header {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .product-image {
+      flex: 0 0 300px;
+      height: 450px;
+      background-color: var(--dark-gray);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--medium-gray);
+    }
+
+    .product-description {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-buttons button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .buy-now-btn {
+      background-color: var(--netflix-red);
+      color: white;
+    }
+
+    .add-to-cart-btn {
+      background-color: rgba(109, 109, 110, 0.7);
+      color: var(--light-text);
+    }
+
+    .action-buttons button:hover {
+      opacity: 0.9;
+    }
+
+    .product-specs {
+      margin-top: 2rem;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .specs-table td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #444;
+    }
+
+    .specs-table td:first-child {
+      width: 30%;
+      color: var(--medium-gray);
+    }
+
+    .reviews-section {
+      margin-top: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .review {
+      background-color: var(--dark-gray);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-stars {
+      color: #ffcc00;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 2rem;
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .product-detail-header {
+        flex-direction: column;
+      }
+
+      .product-image {
+        flex: 0 0 200px;
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">StreamShop</div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/netflix-dashboard">Netflix Dashboard</a>
+      <a href="/amazon-search">Amazon Search</a>
+      <a href="/movie-details">Movie Details</a>
+      <a href="/product-details" class="active">Product Details</a>
+      <a href="/login">Login</a>
+    </div>
+    <div class="auth-buttons">
+      <button onclick="location.href='/login'">Sign In</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="product-detail-header">
+      <div class="product-image">Product Image</div>
+      <div class="product-info">
+        <h1>Premium Wireless Headphones</h1>
+        <div class="product-meta">
+          <span>Brand: SoundMax</span>
+          <span>Rating: ★★★★☆ (4.5)</span>
+        </div>
+        <p class="product-description">
+          Experience crystal-clear audio with our Premium Wireless Headphones. Featuring active noise cancellation, 
+          30-hour battery life, and comfortable over-ear design. Perfect for travel, work, or relaxation.
+        </p>
+        <div class="product-price" style="font-size: 1.8rem; color: #ffcc00; margin-bottom: 1rem;">
+          $129.99
+        </div>
+        <div class="action-buttons">
+          <button class="buy-now-btn">Buy Now</button>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        <div class="product-specs">
+          <h3>Product Details</h3>
+          <table class="specs-table">
+            <tr>
+              <td>Brand</td>
+              <td>SoundMax</td>
+            </tr>
+            <tr>
+              <td>Model Number</td>
+              <td>SM-WH2023</td>
+            </tr>
+            <tr>
+              <td>Connectivity</td>
+              <td>Bluetooth 5.2, 3.5mm Jack</td>
+            </tr>
+            <tr>
+              <td>Battery Life</td>
+              <td>30 hours (250 hours standby)</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>250 grams</td>
+            </tr>
+            <tr>
+              <td>Color</td>
+              <td>Matte Black</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+      <h2 class="section-title">Customer Reviews</h2>
+      <div class="review">
+        <div class="review-header">
+          <strong>Alex Johnson</strong>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p>These headphones are amazing! The noise cancellation works perfectly on my flights. Battery lasts forever.</p>
+      </div>
+      <div class="review">
+        <div class="review-header">
+          <strong>Sam Rivera</strong>
+          <div class="review-stars">★★★★☆</div>
+        </div>
+        <p>Great sound quality and very comfortable. The only downside is the case could be more compact.</p>
+      </div>
+      <div class="review">
+        <div class="review-header">
+          <strong>Jordan Kim</strong>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p>Worth every penny. The Bluetooth connection is stable and the audio is crisp. Highly recommend!</p>
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="reviews-section">
+      <h2 class="section-title">Frequently Bought Together</h2>
+      <div style="display: flex; gap: 1rem; overflow-x: auto; padding: 1rem 0;">
+        <div style="min-width: 150px; background: var(--dark-gray); border-radius: 8px; padding: 1rem; text-align: center;">
+          <div style="height: 100px; background: #333; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">Charger</div>
+          <p>USB-C Charger</p>
+          <p style="color: #ffcc00;">$19.99</p>
+        </div>
+        <div style="min-width: 150px; background: var(--dark-gray); border-radius: 8px; padding: 1rem; text-align: center;">
+          <div style="height: 100px; background: #333; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">Case</div>
+          <p>Hard Shell Case</p>
+          <p style="color: #ffcc00;">$24.99</p>
+        </div>
+        <div style="min-width: 150px; background: var(--dark-gray); border-radius: 8px; padding: 1rem; text-align: center;">
+          <div style="height: 100px; background: #333; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">Cable</div>
+          <p>Audio Cable</p>
+          <p style="color: #ffcc00;">$14.99</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 StreamShop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
