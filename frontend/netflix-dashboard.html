@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Dashboard</title>
+  <style>
+    :root {
+      --netflix-black: #141414;
+      --netflix-red: #e50914;
+      --dark-gray: #222;
+      --light-text: #fff;
+      --medium-gray: #888;
+      --button-hover: #ff0a16;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--netflix-black);
+      color: var(--light-text);
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--netflix-red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--medium-gray);
+    }
+
+    .nav-links a.active {
+      color: var(--netflix-red);
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .auth-buttons button {
+      background-color: var(--netflix-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .auth-buttons button:hover {
+      background-color: var(--button-hover);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scrollbar-width: none;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card {
+      min-width: 200px;
+      height: 120px;
+      background-color: var(--dark-gray);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    /* Movie Detail Preview */
+    .movie-preview {
+      background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), 
+                  url('https://source.unsplash.com/1600x900/?movie') no-repeat center center/cover;
+      height: 60vh;
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .movie-preview h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .movie-preview p {
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+      color: #ccc;
+    }
+
+    .preview-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .preview-buttons button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .play-btn {
+      background-color: var(--light-text);
+      color: var(--netflix-black);
+    }
+
+    .info-btn {
+      background-color: rgba(109, 109, 110, 0.7);
+      color: var(--light-text);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 2rem;
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">StreamShop</div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/netflix-dashboard" class="active">Netflix Dashboard</a>
+      <a href="/amazon-search">Amazon Search</a>
+      <a href="/login">Login</a>
+    </div>
+    <div class="auth-buttons">
+      <button onclick="location.href='/login'">Sign In</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Featured Movie Preview -->
+    <div class="movie-preview">
+      <h2>Featured Movie Title</h2>
+      <p>This is a brief description of the featured movie. It highlights the plot, main characters, and why viewers should watch it.</p>
+      <div class="preview-buttons">
+        <button class="play-btn">Play</button>
+        <button class="info-btn">More Info</button>
+      </div>
+    </div>
+
+    <!-- Continue Watching -->
+    <h2 class="section-title">Continue Watching</h2>
+    <div class="carousel">
+      <div class="card">Movie 1</div>
+      <div class="card">Movie 2</div>
+      <div class="card">Movie 3</div>
+      <div class="card">Movie 4</div>
+      <div class="card">Movie 5</div>
+      <div class="card">Movie 6</div>
+      <div class="card">Movie 7</div>
+      <div class="card">Movie 8</div>
+    </div>
+
+    <!-- Trending Now -->
+    <h2 class="section-title">Trending Now</h2>
+    <div class="carousel">
+      <div class="card">Movie A</div>
+      <div class="card">Movie B</div>
+      <div class="card">Movie C</div>
+      <div class="card">Movie D</div>
+      <div class="card">Movie E</div>
+      <div class="card">Movie F</div>
+      <div class="card">Movie G</div>
+      <div class="card">Movie H</div>
+    </div>
+
+    <!-- My Watchlist -->
+    <h2 class="section-title">My Watchlist</h2>
+    <div class="carousel">
+      <div class="card">Saved 1</div>
+      <div class="card">Saved 2</div>
+      <div class="card">Saved 3</div>
+      <div class="card">Saved 4</div>
+      <div class="card">Saved 5</div>
+      <div class="card">Saved 6</div>
+      <div class="card">Saved 7</div>
+      <div class="card">Saved 8</div>
+    </div>
+
+    <!-- Recommendations -->
+    <h2 class="section-title">Recommended For You</h2>
+    <div class="carousel">
+      <div class="card">Rec 1</div>
+      <div class="card">Rec 2</div>
+      <div class="card">Rec 3</div>
+      <div class="card">Rec 4</div>
+      <div class="card">Rec 5</div>
+      <div class="card">Rec 6</div>
+      <div class="card">Rec 7</div>
+      <div class="card">Rec 8</div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 StreamShop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
