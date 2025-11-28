@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Search</title>
+  <style>
+    :root {
+      --netflix-black: #141414;
+      --netflix-red: #e50914;
+      --dark-gray: #222;
+      --light-text: #fff;
+      --medium-gray: #888;
+      --button-hover: #ff0a16;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--netflix-black);
+      color: var(--light-text);
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--netflix-red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--medium-gray);
+    }
+
+    .nav-links a.active {
+      color: var(--netflix-red);
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .auth-buttons button {
+      background-color: var(--netflix-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .auth-buttons button:hover {
+      background-color: var(--button-hover);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .filters {
+      flex: 0 0 250px;
+      background-color: var(--dark-gray);
+      padding: 1.5rem;
+      border-radius: 8px;
+      height: fit-content;
+    }
+
+    .filter-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-section h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filter-options label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .search-container {
+      flex: 1;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 4px;
+      border: none;
+      background-color: #333;
+      color: var(--light-text);
+    }
+
+    .search-bar button {
+      padding: 0.8rem 1.5rem;
+      background-color: var(--netflix-red);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background-color: var(--button-hover);
+    }
+
+    .sort-options {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
+
+    .sort-options select {
+      padding: 0.5rem;
+      background-color: #333;
+      color: var(--light-text);
+      border: none;
+      border-radius: 4px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background-color: var(--dark-gray);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-image {
+      height: 150px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-info h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-info p {
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      color: #ffcc00;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 2rem;
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      main {
+        flex-direction: column;
+      }
+
+      .filters {
+        flex: 0 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">StreamShop</div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/netflix-dashboard">Netflix Dashboard</a>
+      <a href="/amazon-search" class="active">Amazon Search</a>
+      <a href="/movie-details">Movie Details</a>
+      <a href="/product-details">Product Details</a>
+      <a href="/login">Login</a>
+    </div>
+    <div class="auth-buttons">
+      <button onclick="location.href='/login'">Sign In</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Filters Sidebar -->
+    <aside class="filters">
+      <div class="filter-section">
+        <h3>Categories</h3>
+        <div class="filter-options">
+          <label><input type="checkbox"> Electronics</label>
+          <label><input type="checkbox"> Books</label>
+          <label><input type="checkbox"> Home & Kitchen</label>
+          <label><input type="checkbox"> Fashion</label>
+          <label><input type="checkbox"> Sports</label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Price Range</h3>
+        <div class="filter-options">
+          <label><input type="checkbox"> Under $25</label>
+          <label><input type="checkbox"> $25 - $50</label>
+          <label><input type="checkbox"> $50 - $100</label>
+          <label><input type="checkbox"> Over $100</label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Brand</h3>
+        <div class="filter-options">
+          <label><input type="checkbox"> Amazon Basics</label>
+          <label><input type="checkbox"> Sony</label>
+          <label><input type="checkbox"> Samsung</label>
+          <label><input type="checkbox"> Apple</label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Rating</h3>
+        <div class="filter-options">
+          <label><input type="checkbox"> 4 Stars & Up</label>
+          <label><input type="checkbox"> 3 Stars & Up</label>
+          <label><input type="checkbox"> 2 Stars & Up</label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Product Search Area -->
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button>Search</button>
+      </div>
+
+      <div class="sort-options">
+        <select>
+          <option>Sort by: Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Customer Reviews</option>
+          <option>Newest Arrivals</option>
+        </select>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">Product 1</div>
+          <div class="product-info">
+            <h3>Wireless Headphones</h3>
+            <p>High-quality sound with noise cancellation</p>
+            <div class="product-price">$89.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 2</div>
+          <div class="product-info">
+            <h3>Smart Watch</h3>
+            <p>Track fitness and receive notifications</p>
+            <div class="product-price">$129.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 3</div>
+          <div class="product-info">
+            <h3>Bluetooth Speaker</h3>
+            <p>Portable speaker with 20hr battery life</p>
+            <div class="product-price">$59.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 4</div>
+          <div class="product-info">
+            <h3>Tablet Pro</h3>
+            <p>10-inch display, 128GB storage</p>
+            <div class="product-price">$349.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 5</div>
+          <div class="product-info">
+            <h3>Gaming Console</h3>
+            <p>Next-gen gaming experience</p>
+            <div class="product-price">$499.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 6</div>
+          <div class="product-info">
+            <h3>4K Smart TV</h3>
+            <p>55-inch screen with HDR support</p>
+            <div class="product-price">$599.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 7</div>
+          <div class="product-info">
+            <h3>Digital Camera</h3>
+            <p>24MP sensor with 4K video</p>
+            <div class="product-price">$429.99</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">Product 8</div>
+          <div class="product-info">
+            <h3>Laptop Stand</h3>
+            <p>Ergonomic adjustable stand</p>
+            <div class="product-price">$39.99</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 StreamShop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
